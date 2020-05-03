@@ -13,15 +13,15 @@ font = ImageFont.truetype("pixelmix.ttf", 8)
 serial = spi(port=0, device=0, gpio=noop())
 device = max7219(serial, cascaded=4, block_orientation=-90)
 
-virtual = viewport(device, width=100, height=8)
-
 degreeSymbol = "°"
 
 cool_fact= fact.return_fact()
 temp, weatherDescription = weather.get_tempAndDescription()
 
 fullmsg = f'Current Weather: {temp}{degreeSymbol} and {weatherDescription}. Did you know? {cool_fact}'
+width,height = font.font.getsize(fullmsg)
 
+virtual = viewport(device, width=width[0], height=8)
 
 def main():
 	while True:
